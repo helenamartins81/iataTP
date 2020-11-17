@@ -8,15 +8,19 @@
   import LineChart from '../LineChart'
 
   export default {
+      name: "SoundChart",
     components: {
       LineChart
     },
+    props: ['soundvalue'],
     data () {
       return {
         datacollection: null,
         time : 0,
+        //lastvalue : this.soundvalue,
         values : [],
-        timevalues: []
+        timevalues: [],
+        hexcolour: '#42f590'
       }
     },
     mounted () {
@@ -29,19 +33,25 @@
           datasets: [
             {
               label: 'Sound Value',
-              backgroundColor: '#f87979',
+              backgroundColor: this.hexcolour,
               data: this.values
             }
           ]
         }
+        
         this.time += 10;
         this.timevalues.push(this.time);
-        this.values.push(this.getRandomInt());
-        console.log(this.values);
-        setTimeout(() => this.fillData(), 5000);
-      },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+        this.values.push(this.soundvalue);
+
+        if (this.soundvalue > 751) {
+            this.hexcolour = '#f54242';
+        }else{
+            this.hexcolour = '#42f590';
+        }
+        
+        console.log(this.soundvalue);
+        
+        setTimeout(() => this.fillData(), 10000);
       }
     }
   }

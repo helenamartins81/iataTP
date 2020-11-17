@@ -1,10 +1,13 @@
 <template>
   <div class="hello">
     <h2>Sound Level: {{ value }} dB</h2>
+    <SoundChart :soundvalue="value" />
   </div>
 </template>
 
 <script>
+
+  import SoundChart from './Chart.vue'
 export default {
   name: 'HelloWorld',
   data: () => ({
@@ -12,6 +15,9 @@ export default {
   }),
   props: {
     msg: String
+  },
+  components: {
+    SoundChart
   },
   methods: {
     getValue(){
