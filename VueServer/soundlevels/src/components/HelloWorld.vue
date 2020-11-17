@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h2>Sound Level: {{ value }} dB</h2>
+    <h2>Current Sound Level: {{ value }} dB</h2>
     <SoundChart :soundvalue="value" />
   </div>
 </template>
@@ -13,9 +13,6 @@ export default {
   data: () => ({
     value : ''
   }),
-  props: {
-    msg: String
-  },
   components: {
     SoundChart
   },

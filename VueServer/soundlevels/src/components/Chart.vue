@@ -43,7 +43,7 @@
         this.timevalues.push(this.time);
         this.values.push(this.soundvalue);
 
-        if (this.soundvalue > 751) {
+        if (this.soundvalue > 50) {
             this.hexcolour = '#f54242';
         }else{
             this.hexcolour = '#42f590';
