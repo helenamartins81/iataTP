@@ -26,6 +26,11 @@
     mounted () {
       this.fillData()
     },
+    computed: {
+      colour() {
+        return this.soundvalue > 50 ? '#f54242' : '#42f590';
+      }
+    },
     methods: {
       fillData () {
         this.datacollection = {
@@ -33,7 +38,7 @@
           datasets: [
             {
               label: 'Sound Value',
-              backgroundColor: this.hexcolour,
+              backgroundColor: this.colour,
               data: this.values
             }
           ]
@@ -42,12 +47,6 @@
         this.time += 10;
         this.timevalues.push(this.time);
         this.values.push(this.soundvalue);
-
-        if (this.soundvalue > 50) {
-            this.hexcolour = '#f54242';
-        }else{
-            this.hexcolour = '#42f590';
-        }
         
         console.log(this.soundvalue);
         
