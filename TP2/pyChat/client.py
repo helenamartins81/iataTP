@@ -1,8 +1,10 @@
 # Python program to implement client side of chat room.
 import os
+import random
 import select
 import socket
 import sys
+import re
 
 from autocorrect import Speller
 
@@ -34,38 +36,47 @@ else:
     print("Saving brain file: " + BRAIN_FILE)
     kernel.saveBrain(BRAIN_FILE)
 
+# get the first line if this is the one with the words words
+lines = open("randomanimals.txt").readlines()
+
+randomname = random.choice(lines)
+
+server.send(randomname[:-1].encode())
 
 while True:
     # maintains a list of possible input streams
     sockets_list = [sys.stdin, server]
 
-    """ There are two possible input situations. Either the
-	user wants to give manual input to send to other people,
-	or the server is sending a message to be printed on the
-	screen. Select returns from sockets_list, the stream that
-	is reader for input. So for example, if the server wants
-	to send a message, then the if condition will hold true
-	below.If the user wants to send a message, the else
-	condition will evaluate as true"""
+    """
+    Select é utilizado para identificar o estado atual
+    (ou é necessario receber a msg do servidor, ou o user está
+    a escrever uma mensagem para ser enviada).
+    O if faz essa identificaçao
+    """
     read_sockets, write_socket, error_socket = select.select(
         sockets_list, [], [])
 
     for socks in read_sockets:
         if socks == server:
             message = socks.recv(2048)
+
+            if not message.decode():
+                print('Servidor abaixo, vou sair...')
+                exit()
+
             decodedmsg = message.decode()
-            msg = decodedmsg
+            print(decodedmsg)
+
+            msg = re.sub('<[^>]+>', '', decodedmsg)
             msg = [spell(w) for w in (msg.split())]
             question = " ".join(msg)
             response = kernel.respond(question)
-            suggestion = '[Suggestion: ' + response +' ]' 
+            suggestion = '[Suggestion: ' + response + ' ]'
 
-            print(decodedmsg)
             print(suggestion)
         else:
             message = sys.stdin.readline()
             message = message[:-1]
             server.send(message.encode())
-            sys.stdout.write(message + '\n')
             sys.stdout.flush()
 server.close()

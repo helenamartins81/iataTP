@@ -1,0 +1,61 @@
+
+Felidae
+Cat
+Cattle
+Dog
+Donkey
+Goat
+Guinea pig
+Horse
+Pig
+Rabbit
+Sheep
+Chicken
+Duck 
+Goose 
+Pigeon
+Turkey
+Aardvark
+Aardwolf
+Albatross
+Alligator
+Alpaca
+Anaconda
+Angelfish
+Anglerfish
+Ant
+Anteater
+Antelope
+Antlion
+Ape
+Aphid
+Asp
+Baboon
+Badger
+Bald eagle
+Bandicoot
+Barnacle
+Barracuda
+Basilisk
+Bass
+Bat
+Bear
+list
+Beaver
+Bedbug
+Bee
+Beetle
+Bird
+list
+Bison
+Blackbird
+Blue bird
+Blue jay
+Blue whale
+Boa
+Boar
+Bobcat
+Bobolink
+Bonobo
+Booby
+Bovid
