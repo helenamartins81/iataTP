@@ -33,9 +33,8 @@ def clientthread(conn, addr):
             message = conn.recv(2048)
             if message:
                 decodedmsg = message.decode()
-                """
-                Print da mensagem com a address do client
-                """
+                
+                #Print da mensagem com o nome do client
                 print("<" + name + "> " + decodedmsg)
 
                 # Broadcast da mensagem
@@ -87,7 +86,7 @@ while True:
     list_of_clients.append(conn)
 
     # Print address de novo user
-    print(addr[0] + " connected")
+    print("New user connected")
 
     # Cria thread para novo user
     start_new_thread(clientthread, (conn, addr))

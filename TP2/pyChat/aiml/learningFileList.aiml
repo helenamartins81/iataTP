@@ -3,7 +3,7 @@
         <pattern>LOAD AIML</pattern>
         <template>
             <!-- Load standard AIML set -->
-            <learn>aiml/data/*.aiml</learn>
+            <learn>aiml/AIML_alice/*.aiml</learn>
         </template>
     </category>
 </aiml>

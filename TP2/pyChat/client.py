@@ -36,9 +36,8 @@ else:
     print("Saving brain file: " + BRAIN_FILE)
     kernel.saveBrain(BRAIN_FILE)
 
-# get the first line if this is the one with the words words
+# get random animal name
 lines = open("randomanimals.txt").readlines()
-
 randomname = random.choice(lines)
 
 server.send(randomname[:-1].encode())
@@ -67,7 +66,10 @@ while True:
             decodedmsg = message.decode()
             print(decodedmsg)
 
+            # retira o que está entre "<>"
             msg = re.sub('<[^>]+>', '', decodedmsg)
+
+            #fix spelling
             msg = [spell(w) for w in (msg.split())]
             question = " ".join(msg)
             response = kernel.respond(question)
